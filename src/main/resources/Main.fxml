@@ -27,6 +27,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ContextMenu?>
 <GridPane hgap="8.0" prefHeight="720.0" prefWidth="1200.0" vgap="8.0" xmlns="http://javafx.com/javafx/11.0.1"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
    <columnConstraints>
@@ -165,6 +166,14 @@
                                                  editable="false" prefWidth="310.0"
                                                  text="Package name"/>
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="uninstallerCopyAppNameMenuItem" mnemonicParsing="false" onAction="#uninstallerCopyAppNameMenuItemPressed" text="Copy app name" />
+                                          <MenuItem fx:id="uninstallerCopyPackageNameMenuItem" mnemonicParsing="false" onAction="#uninstallerCopyPackageNameMenuItemPressed" text="Copy package name" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                               <Button fx:id="uninstallButton"
                                       maxWidth="1.7976931348623157E308"
@@ -200,6 +209,14 @@
                                                  editable="false" prefWidth="310.0"
                                                  text="Package name"/>
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="reinstallerCopyAppNameMenuItem" mnemonicParsing="false" onAction="#reinstallerCopyAppNameMenuItemPressed" text="Copy app name" />
+                                          <MenuItem fx:id="reinstallerCopyPackageNameMenuItem" mnemonicParsing="false" onAction="#reinstallerCopyPackageNameMenuItemPressed" text="Copy package name" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                               <Button fx:id="reinstallButton"
                                       maxWidth="1.7976931348623157E308"
@@ -235,6 +252,14 @@
                                                  editable="false" prefWidth="310.0"
                                                  text="Package name"/>
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="disablerCopyAppNameMenuItem" mnemonicParsing="false" onAction="#disablerCopyAppNameMenuItemPressed" text="Copy app name" />
+                                          <MenuItem fx:id="disablerCopyPackageNameMenuItem" mnemonicParsing="false" onAction="#disablerCopyPackageNameMenuItemPressed" text="Copy package name" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                               <Button fx:id="disableButton" maxWidth="1.7976931348623157E308"
                                       mnemonicParsing="false"
@@ -269,6 +294,14 @@
                                                  editable="false" prefWidth="310.0"
                                                  text="Package name"/>
                                  </columns>
+                                 <contextMenu>
+                                    <ContextMenu>
+                                       <items>
+                                          <MenuItem fx:id="enablerCopyAppNameMenuItem" mnemonicParsing="false" onAction="#enablerCopyAppNameMenuItemPressed" text="Copy app name" />
+                                          <MenuItem fx:id="enablerCopyPackageNameMenuItem" mnemonicParsing="false" onAction="#enablerCopyPackageNameMenuItemPressed" text="Copy package name" />
+                                       </items>
+                                    </ContextMenu>
+                                 </contextMenu>
                               </TableView>
                               <Button fx:id="enableButton" maxWidth="1.7976931348623157E308"
                                       mnemonicParsing="false" onAction="#enableButtonPressed"

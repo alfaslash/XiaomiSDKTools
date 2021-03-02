@@ -1317,4 +1317,67 @@ class MainController : Initializable {
             }
         }
     }
+
+    @FXML
+    private fun uninstallerCopyAppNameMenuItemPressed() {
+        copyAppName(uninstallerTableView)
+    }
+
+    @FXML
+    private fun uninstallerCopyPackageNameMenuItemPressed() {
+        copyPackageName(uninstallerTableView)
+    }
+
+    @FXML
+    private fun reinstallerCopyAppNameMenuItemPressed() {
+        copyAppName(reinstallerTableView)
+    }
+
+    @FXML
+    private fun reinstallerCopyPackageNameMenuItemPressed() {
+        copyPackageName(reinstallerTableView)
+    }
+
+    @FXML
+    private fun disablerCopyAppNameMenuItemPressed() {
+        copyAppName(disablerTableView)
+    }
+
+    @FXML
+    private fun disablerCopyPackageNameMenuItemPressed() {
+        copyPackageName(disablerTableView)
+    }
+
+    @FXML
+    private fun enablerCopyAppNameMenuItemPressed() {
+        copyAppName(enablerTableView)
+    }
+
+    @FXML
+    private fun enablerCopyPackageNameMenuItemPressed() {
+        copyPackageName(enablerTableView)
+    }
+
+    private fun copyAppName(tableView: TableView<App>) {
+        val selectedItem = tableView.selectionModel.selectedItem
+
+        if (selectedItem != null) {
+            setClipboardValue(selectedItem.appnameProperty().value)
+        }
+    }
+
+    private fun copyPackageName(tableView: TableView<App>) {
+        val selectedItem = tableView.selectionModel.selectedItem
+
+        if (selectedItem != null) {
+            setClipboardValue(selectedItem.packagenameProperty().value)
+        }
+    }
+
+    private fun setClipboardValue(value: String) {
+        val toolkit = Toolkit.getDefaultToolkit()
+        val clipboard = toolkit.systemClipboard
+        val stringSelection = StringSelection(value)
+        clipboard.setContents(stringSelection, stringSelection)
+    }
 }
