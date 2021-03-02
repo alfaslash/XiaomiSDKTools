@@ -25,9 +25,9 @@ object Command {
             setup("")
         } catch (e: Exception) {
             try {
-                if (XiaomiADBFastbootTools.win)
-                    setup("${XiaomiADBFastbootTools.dir.absolutePath}\\platform-tools\\")
-                else setup("${XiaomiADBFastbootTools.dir.absolutePath}/platform-tools/")
+                if (XiaomiSDKTools.win)
+                    setup("${XiaomiSDKTools.dir.absolutePath}\\platform-tools\\")
+                else setup("${XiaomiSDKTools.dir.absolutePath}/platform-tools/")
             } catch (ex: Exception) {
                 if (printErr)
                     ex.printStackTrace()

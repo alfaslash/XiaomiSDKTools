@@ -11,7 +11,7 @@ import java.util.*
 
 class FileExplorer(private val statusTextField: TextField, private val statusProgressBar: ProgressBar) {
 
-    var path = "/"
+    var path = "/sdcard/"
 
     private fun makeFile(out: String): AndroidFile? {
         val bits = mutableListOf<String>().also {

@@ -31,15 +31,15 @@ fun MutableMap<String, MutableList<String>>.add(key: String, value: String) {
 }
 
 fun startProcess(vararg command: String, redirectErrorStream: Boolean = false): Process =
-    ProcessBuilder(*command).directory(XiaomiADBFastbootTools.dir).redirectErrorStream(redirectErrorStream).start()
+    ProcessBuilder(*command).directory(XiaomiSDKTools.dir).redirectErrorStream(redirectErrorStream).start()
 
 fun startProcess(command: List<String?>, redirectErrorStream: Boolean = false): Process =
-    ProcessBuilder(command).directory(XiaomiADBFastbootTools.dir).redirectErrorStream(redirectErrorStream).start()
+    ProcessBuilder(command).directory(XiaomiSDKTools.dir).redirectErrorStream(redirectErrorStream).start()
 
-fun runScript(file: File, redirectErrorStream: Boolean = false): Process = if (XiaomiADBFastbootTools.win)
-    ProcessBuilder("cmd.exe", "/c", file.absolutePath).directory(XiaomiADBFastbootTools.dir)
+fun runScript(file: File, redirectErrorStream: Boolean = false): Process = if (XiaomiSDKTools.win)
+    ProcessBuilder("cmd.exe", "/c", file.absolutePath).directory(XiaomiSDKTools.dir)
         .redirectErrorStream(redirectErrorStream).start()
-else ProcessBuilder("sh", "-c", file.absolutePath).directory(XiaomiADBFastbootTools.dir)
+else ProcessBuilder("sh", "-c", file.absolutePath).directory(XiaomiSDKTools.dir)
     .redirectErrorStream(redirectErrorStream).start()
 
 suspend fun Exception.alert() {

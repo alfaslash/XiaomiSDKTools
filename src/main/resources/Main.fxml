@@ -40,7 +40,7 @@
       <Menu fx:id="optionsMenu" mnemonicParsing="false" text="Options">
          <MenuItem fx:id="reloadMenuItem" disable="true" mnemonicParsing="false" onAction="#reloadMenuItemPressed"
                    text="Reload device"/>
-         <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutMenuItemPressed" text="About"/>
+         <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#exitMenuItemPressed" text="Exit"/>
       </Menu>
       <Menu fx:id="deviceMenu" disable="true" mnemonicParsing="false" text="Device">
          <Menu fx:id="rebootMenu" mnemonicParsing="false" text="Reboot to">
@@ -62,6 +62,12 @@
                         text="Second Space"/>
          <MenuItem fx:id="addAppsButton" mnemonicParsing="false" onAction="#addAppsButtonPressed"
                    text="Add apps"/>
+      </Menu>
+      <Menu fx:id="localizationMenu" mnemonicParsing="false" text="Localization">
+         <MenuItem fx:id="changeLocalization" mnemonicParsing="false" onAction="#changeLocalizationPressed" text="Change system language" />
+      </Menu>
+      <Menu fx:id="aboutMenu" mnemonicParsing="false" text="About">
+         <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#aboutMenuItemPressed" text="About"/>
       </Menu>
    </MenuBar>
    <GridPane GridPane.rowIndex="1">
@@ -283,52 +289,6 @@
                      <padding>
                         <Insets left="5.0"/>
                      </padding>
-                     <TitledPane fx:id="camera2Pane" animated="false" collapsible="false"
-                                 disable="true" text="Camera2 API (HAL3)">
-                        <font>
-                           <Font size="14.0"/>
-                        </font>
-                        <AnchorPane>
-                           <VBox spacing="8.0" AnchorPane.bottomAnchor="0.0"
-                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                 AnchorPane.topAnchor="0.0">
-                              <Button fx:id="enableCamera2Button"
-                                      maxWidth="1.7976931348623157E308"
-                                      mnemonicParsing="false"
-                                      onAction="#enableCamera2ButtonPressed"
-                                      text="Enable Camera2">
-                                 <font>
-                                    <Font size="14.0"/>
-                                 </font>
-                              </Button>
-                              <Button fx:id="disableCamera2Button"
-                                      maxWidth="1.7976931348623157E308"
-                                      mnemonicParsing="false"
-                                      onAction="#disableCamera2ButtonPressed"
-                                      text="Disable Camera2">
-                                 <font>
-                                    <Font size="14.0"/>
-                                 </font>
-                              </Button>
-                              <Button fx:id="enableEISButton"
-                                      maxWidth="1.7976931348623157E308"
-                                      mnemonicParsing="false"
-                                      onAction="#enableEISButtonPressed" text="Enable EIS">
-                                 <font>
-                                    <Font size="14.0"/>
-                                 </font>
-                              </Button>
-                              <Button fx:id="disableEISButton"
-                                      maxWidth="1.7976931348623157E308"
-                                      mnemonicParsing="false"
-                                      onAction="#disableEISButtonPressed" text="Disable EIS">
-                                 <font>
-                                    <Font size="14.0"/>
-                                 </font>
-                              </Button>
-                           </VBox>
-                        </AnchorPane>
-                     </TitledPane>
                      <TitledPane fx:id="fileExplorerPane" collapsible="false" disable="true"
                                  text="File Explorer">
                         <font>
@@ -458,6 +418,52 @@
                                       mnemonicParsing="false"
                                       onAction="#resetResButtonPressed"
                                       text="Reset to default">
+                                 <font>
+                                    <Font size="14.0"/>
+                                 </font>
+                              </Button>
+                           </VBox>
+                        </AnchorPane>
+                     </TitledPane>
+                     <TitledPane fx:id="camera2Pane" animated="false" collapsible="false"
+                                 disable="true" text="Camera2 API (HAL3)">
+                        <font>
+                           <Font size="14.0"/>
+                        </font>
+                        <AnchorPane>
+                           <VBox spacing="8.0" AnchorPane.bottomAnchor="0.0"
+                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                 AnchorPane.topAnchor="0.0">
+                              <Button fx:id="enableCamera2Button"
+                                      maxWidth="1.7976931348623157E308"
+                                      mnemonicParsing="false"
+                                      onAction="#enableCamera2ButtonPressed"
+                                      text="Enable Camera2">
+                                 <font>
+                                    <Font size="14.0"/>
+                                 </font>
+                              </Button>
+                              <Button fx:id="disableCamera2Button"
+                                      maxWidth="1.7976931348623157E308"
+                                      mnemonicParsing="false"
+                                      onAction="#disableCamera2ButtonPressed"
+                                      text="Disable Camera2">
+                                 <font>
+                                    <Font size="14.0"/>
+                                 </font>
+                              </Button>
+                              <Button fx:id="enableEISButton"
+                                      maxWidth="1.7976931348623157E308"
+                                      mnemonicParsing="false"
+                                      onAction="#enableEISButtonPressed" text="Enable EIS">
+                                 <font>
+                                    <Font size="14.0"/>
+                                 </font>
+                              </Button>
+                              <Button fx:id="disableEISButton"
+                                      maxWidth="1.7976931348623157E308"
+                                      mnemonicParsing="false"
+                                      onAction="#disableEISButtonPressed" text="Disable EIS">
                                  <font>
                                     <Font size="14.0"/>
                                  </font>

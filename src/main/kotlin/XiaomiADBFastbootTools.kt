@@ -7,17 +7,17 @@ import kotlinx.coroutines.runBlocking
 import java.io.File
 
 
-class XiaomiADBFastbootTools : Application() {
+class XiaomiSDKTools : Application() {
 
     companion object {
-        const val version = "7.0.3"
-        val dir = File(System.getProperty("user.home"), "XiaomiADBFastbootTools")
+        const val version = "1.0.0"
+        val dir = File(System.getProperty("user.home"), "XiaomiSDKTools")
         val win = "win" in System.getProperty("os.name").toLowerCase()
         val linux = "linux" in System.getProperty("os.name").toLowerCase()
 
         @JvmStatic
         fun main(args: Array<String>) {
-            launch(XiaomiADBFastbootTools::class.java)
+            launch(XiaomiSDKTools::class.java)
         }
     }
 
@@ -28,7 +28,7 @@ class XiaomiADBFastbootTools : Application() {
     @Throws(Exception::class)
     override fun start(stage: Stage) {
         stage.scene = Scene(FXMLLoader.load(javaClass.classLoader.getResource("Main.fxml")))
-        stage.title = "Xiaomi ADB/Fastboot Tools"
+        stage.title = "Xiaomi SDK Tools"
         stage.icons.add(Image("icon.png"))
         stage.show()
     }

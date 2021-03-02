@@ -1,8 +1,4 @@
-# Xiaomi ADB/Fastboot Tools 😊
-
-![](https://img.shields.io/github/downloads/Szaki/XiaomiADBFastbootTools/total.svg)
-![](https://img.shields.io/github/license/Szaki/XiaomiADBFastbootTools.svg)
-[![](https://img.shields.io/twitter/url/https/github.com/Szaki/XiaomiADBFastbootTools.svg?style=social)](https://twitter.com/Szaki_EU)
+# Xiaomi SDK Tools
 
 ## Modules
 
@@ -20,7 +16,7 @@
 
 ![](screenshot.png)
 
-## Download the executable JAR from [here](https://github.com/Szaki/XiaomiADBFastbootTools/releases/latest).
+## Download the executable JAR from [here](https://github.com/alfaslash/XiaomiSDKTools/releases/latest).
 
 **Warning: Use the program at your own risk!**
 
@@ -59,12 +55,12 @@
 
 To run the downloaded application or jar file, open terminal and then type in the following command after switching your directory to file location -
 ```
-java -jar XiaomiADBFastbootTools.jar
+java -jar XiaomiSDKTools.jar
 ```
 
 ### The application doesn't work. Is there anything I should have installed?
 
-Yes, the Xiaomi ADB/Fastboot Tools was developed in Kotlin for the Java Virtual Machine so it needs the JRE to run, **version 11 or later**.
+Yes, the Xiaomi SDK Tools was developed in Kotlin for the Java Virtual Machine so it needs the JRE to run, **version 11 or later**.
 
 #### Windows
 
@@ -114,7 +110,7 @@ If the attempted uninstallation of an application results in a failure or anythi
 
 Simply reinstall them using the Reinstaller module when connected in ADB mode. In case the Reinstaller module is disabled because your device doesn't support it, you must perform a factory reset.
 
-### The app is called Xiaomi ADB/Fastboot Tools. Does that mean that it only works with Xiaomi devices?
+### The app is called Xiaomi SDK Tools. Does that mean that it only works with Xiaomi devices?
 
 ADB and Fastboot are universal interfaces on Android but some of the algorithms and methods of the app are specific to Xiaomi devices, so mostly yes.
 

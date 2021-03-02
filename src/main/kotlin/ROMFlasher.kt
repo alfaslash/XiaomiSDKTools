@@ -8,13 +8,13 @@ import java.util.*
 
 object ROMFlasher {
 
-    var directory = XiaomiADBFastbootTools.dir
+    var directory = XiaomiSDKTools.dir
     lateinit var progressBar: ProgressBar
     lateinit var outputTextArea: TextInputControl
     lateinit var progressIndicator: ProgressIndicator
 
     private suspend fun setupScript(arg: String) = withContext(Dispatchers.IO) {
-        if (XiaomiADBFastbootTools.win)
+        if (XiaomiSDKTools.win)
             File(directory, "script.bat").apply {
                 try {
                     writeText(File(directory, "$arg.bat").readText().replace("fastboot", "${Command.prefix}fastboot"))

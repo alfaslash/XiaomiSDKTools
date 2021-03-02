@@ -433,10 +433,10 @@ class MainController : Initializable {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val link =
-                    URL("https://api.github.com/repos/Szaki/XiaomiADBFastbootTools/releases/latest").readText()
+                    URL("https://api.github.com/repos/alfaslash/XiaomiSDKTools/releases/latest").readText()
                         .substringAfter("\"html_url\":\"").substringBefore('"')
                 val latest = link.substringAfterLast('/')
-                if (latest > XiaomiADBFastbootTools.version)
+                if (latest > XiaomiSDKTools.version)
                     withContext(Dispatchers.Main) {
                         val vb = VBox()
                         val download = Hyperlink("Download")
@@ -448,7 +448,7 @@ class MainController : Initializable {
                                 "Version $latest is available!"
                             vb.alignment = Pos.CENTER
                             download.onAction = EventHandler {
-                                if (XiaomiADBFastbootTools.linux)
+                                if (XiaomiSDKTools.linux)
                                     Runtime.getRuntime().exec("xdg-open $link")
                                 else Desktop.getDesktop().browse(URI(link))
                             }
@@ -479,13 +479,13 @@ class MainController : Initializable {
                         isResizable = false
                         show()
                         withContext(Dispatchers.IO) {
-                            val file = File(XiaomiADBFastbootTools.dir, "platform-tools.zip")
+                            val file = File(XiaomiSDKTools.dir, "platform-tools.zip")
                             when {
-                                XiaomiADBFastbootTools.win -> Downloader(
+                                XiaomiSDKTools.win -> Downloader(
                                     "https://dl.google.com/android/repository/platform-tools-latest-windows.zip",
                                     file, label
                                 ).start(this)
-                                XiaomiADBFastbootTools.linux -> Downloader(
+                                XiaomiSDKTools.linux -> Downloader(
                                     "https://dl.google.com/android/repository/platform-tools-latest-linux.zip",
                                     file, label
                                 ).start(this)
@@ -497,13 +497,13 @@ class MainController : Initializable {
                             withContext(Dispatchers.Main) {
                                 label.text = "Unzipping..."
                             }
-                            File(XiaomiADBFastbootTools.dir, "platform-tools").mkdirs()
+                            File(XiaomiSDKTools.dir, "platform-tools").mkdirs()
                             ZipFile(file).use { zip ->
                                 zip.stream().forEach { entry ->
                                     if (entry.isDirectory)
-                                        File(XiaomiADBFastbootTools.dir, entry.name).mkdirs()
+                                        File(XiaomiSDKTools.dir, entry.name).mkdirs()
                                     else zip.getInputStream(entry).use { input ->
-                                        File(XiaomiADBFastbootTools.dir, entry.name).apply {
+                                        File(XiaomiSDKTools.dir, entry.name).apply {
                                             outputStream().use { output ->
                                                 input.copyTo(output)
                                             }
@@ -540,7 +540,7 @@ class MainController : Initializable {
         "1" in Command.exec(mutableListOf("adb", "shell", "getprop", "persist.camera.eis.enable"))
 
     @FXML
-    private fun disableCamera2ButtonPressed(event: ActionEvent) {
+    private fun disableCamera2ButtonPressed() {
         GlobalScope.launch {
             if (Device.checkRecovery()) {
                 Command.exec(mutableListOf("adb", "shell", "setprop", "persist.camera.HAL3.enabled", "0"))
@@ -554,7 +554,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun enableCamera2ButtonPressed(event: ActionEvent) {
+    private fun enableCamera2ButtonPressed() {
         GlobalScope.launch {
             if (Device.checkRecovery()) {
                 Command.exec(mutableListOf("adb", "shell", "setprop", "persist.camera.HAL3.enabled", "1"))
@@ -568,7 +568,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun disableEISButtonPressed(event: ActionEvent) {
+    private fun disableEISButtonPressed() {
         GlobalScope.launch {
             if (Device.checkRecovery()) {
                 Command.exec(mutableListOf("adb", "shell", "setprop", "persist.camera.eis.enable", "0"))
@@ -582,7 +582,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun enableEISButtonPressed(event: ActionEvent) {
+    private fun enableEISButtonPressed() {
         GlobalScope.launch {
             if (Device.checkRecovery()) {
                 Command.exec(mutableListOf("adb", "shell", "setprop", "persist.camera.eis.enable", "1"))
@@ -596,7 +596,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun openButtonPressed(event: ActionEvent) {
+    private fun openButtonPressed() {
         GlobalScope.launch(Dispatchers.IO) {
             if (Device.checkADB()) {
                 val scene = Scene(FXMLLoader(javaClass.classLoader.getResource("FileExplorer.fxml")).load())
@@ -614,7 +614,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun applyDpiButtonPressed(event: ActionEvent) {
+    private fun applyDpiButtonPressed() {
         if (dpiTextField.text.isNotBlank())
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -637,7 +637,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun resetDpiButtonPressed(event: ActionEvent) {
+    private fun resetDpiButtonPressed() {
         GlobalScope.launch {
             if (Device.checkADB()) {
                 val attempt = Command.execDisplayed(mutableListOf("adb", "shell", "wm", "density", "reset"))
@@ -656,7 +656,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun applyResButtonPressed(event: ActionEvent) {
+    private fun applyResButtonPressed() {
         if (widthTextField.text.isNotBlank() && heightTextField.text.isNotBlank())
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -687,7 +687,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun resetResButtonPressed(event: ActionEvent) {
+    private fun resetResButtonPressed() {
         GlobalScope.launch {
             if (Device.checkADB()) {
                 val attempt = Command.execDisplayed(mutableListOf("adb", "shell", "wm", "size", "reset"))
@@ -706,7 +706,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun readPropertiesMenuItemPressed(event: ActionEvent) {
+    private fun readPropertiesMenuItemPressed() {
         GlobalScope.launch {
             when (Device.mode) {
                 Mode.ADB, Mode.RECOVERY -> {
@@ -775,7 +775,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun antirbButtonPressed(event: ActionEvent) {
+    private fun antirbButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot()) {
                 File("dummy.img").apply {
@@ -812,7 +812,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun flashimageButtonPressed(event: ActionEvent) {
+    private fun flashimageButtonPressed() {
         image?.let {
             partitionComboBox.value?.let { pcb ->
                 if (it.absolutePath.isNotBlank() && pcb.isNotBlank())
@@ -863,7 +863,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun flashromButtonPressed(event: ActionEvent) {
+    private fun flashromButtonPressed() {
         romDirectory?.let { dir ->
             ROMFlasher.directory = dir
             scriptComboBox.value?.let { scb ->
@@ -888,7 +888,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun bootButtonPressed(event: ActionEvent) {
+    private fun bootButtonPressed() {
         image?.let {
             if (it.absolutePath.isNotBlank())
                 GlobalScope.launch {
@@ -899,7 +899,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun cacheButtonPressed(event: ActionEvent) {
+    private fun cacheButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot())
                 Command.execDisplayed(mutableListOf("fastboot", "erase", "cache")) else checkDevice()
@@ -907,7 +907,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun dataButtonPressed(event: ActionEvent) {
+    private fun dataButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot()) {
                 if (confirm("All your data will be gone.")) {
@@ -920,7 +920,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun cachedataButtonPressed(event: ActionEvent) {
+    private fun cachedataButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot()) {
                 if (confirm("All your data will be gone.")) {
@@ -934,7 +934,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun lockButtonPressed(event: ActionEvent) {
+    private fun lockButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot()) {
                 if (confirm("Your partitions must be intact in order to successfully lock the bootloader.")) {
@@ -947,7 +947,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun unlockButtonPressed(event: ActionEvent) {
+    private fun unlockButtonPressed() {
         GlobalScope.launch {
             if (Device.checkFastboot()) {
                 if (confirm("All your data will be gone.")) {
@@ -958,7 +958,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun getlinkButtonPressed(event: ActionEvent) {
+    private fun getlinkButtonPressed() {
         branchComboBox.value?.let {
             if (codenameTextField.text.isNotBlank()) {
                 GlobalScope.launch {
@@ -1023,7 +1023,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun systemMenuItemPressed(event: ActionEvent) {
+    private fun systemMenuItemPressed() {
         GlobalScope.launch {
             when (Device.mode) {
                 Mode.ADB, Mode.RECOVERY -> {
@@ -1043,7 +1043,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun recoveryMenuItemPressed(event: ActionEvent) {
+    private fun recoveryMenuItemPressed() {
         GlobalScope.launch {
             when (Device.mode) {
                 Mode.ADB, Mode.RECOVERY -> {
@@ -1058,7 +1058,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun fastbootMenuItemPressed(event: ActionEvent) {
+    private fun fastbootMenuItemPressed() {
         GlobalScope.launch {
             when (Device.mode) {
                 Mode.ADB, Mode.RECOVERY -> {
@@ -1078,7 +1078,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun edlMenuItemPressed(event: ActionEvent) {
+    private fun edlMenuItemPressed() {
         GlobalScope.launch {
             when (Device.mode) {
                 Mode.ADB, Mode.RECOVERY -> {
@@ -1098,10 +1098,15 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun reloadMenuItemPressed(event: ActionEvent) = GlobalScope.launch { checkDevice() }
+    private fun reloadMenuItemPressed() = GlobalScope.launch { checkDevice() }
 
     @FXML
-    private fun uninstallButtonPressed(event: ActionEvent) {
+    private fun exitMenuItemPressed() {
+        Platform.exit()
+    }
+
+    @FXML
+    private fun uninstallButtonPressed() {
         if (isAppSelected(uninstallerTableView.items))
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -1123,7 +1128,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun reinstallButtonPressed(event: ActionEvent) {
+    private fun reinstallButtonPressed() {
         if (isAppSelected(reinstallerTableView.items))
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -1145,7 +1150,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun disableButtonPressed(event: ActionEvent) {
+    private fun disableButtonPressed() {
         if (isAppSelected(disablerTableView.items))
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -1167,7 +1172,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun enableButtonPressed(event: ActionEvent) {
+    private fun enableButtonPressed() {
         if (isAppSelected(enablerTableView.items))
             GlobalScope.launch {
                 if (Device.checkADB()) {
@@ -1189,7 +1194,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun secondSpaceButtonPressed(event: ActionEvent) {
+    private fun secondSpaceButtonPressed() {
         GlobalScope.launch {
             if (Device.checkADB())
                 AppManager.apply {
@@ -1202,7 +1207,7 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun addAppsButtonPressed(event: ActionEvent) {
+    private fun addAppsButtonPressed() {
         GlobalScope.launch(Dispatchers.IO) {
             if (Device.checkADB()) {
                 val scene = Scene(FXMLLoader(javaClass.classLoader.getResource("AppAdder.fxml")).load())
@@ -1219,13 +1224,13 @@ class MainController : Initializable {
     }
 
     @FXML
-    private fun aboutMenuItemPressed(event: ActionEvent) {
+    private fun aboutMenuItemPressed() {
         Alert(AlertType.INFORMATION).apply {
             initStyle(StageStyle.UTILITY)
             title = "About"
             graphic = ImageView("icon.png")
             headerText =
-                "Xiaomi ADB/Fastboot Tools\nVersion ${XiaomiADBFastbootTools.version}\nCreated by Szaki\n\n" +
+                "Xiaomi SDK Tools\nVersion ${XiaomiSDKTools.version}\nDeveloper Alfaslash\n\n" +
                         "SDK Platform Tools\n${
                             runBlocking {
                                 Command.exec(
@@ -1238,31 +1243,78 @@ class MainController : Initializable {
                         }"
             val vb = VBox()
             vb.alignment = Pos.CENTER
-            val discord = Hyperlink("Xiaomi Community on Discord")
-            discord.onAction = EventHandler {
-                if (XiaomiADBFastbootTools.linux)
-                    Runtime.getRuntime().exec("xdg-open http://discord.szaki.io/")
-                else Desktop.getDesktop().browse(URI("http://discord.szaki.io/"))
-            }
-            discord.font = Font(15.0)
-            val twitter = Hyperlink("Szaki on Twitter")
-            twitter.onAction = EventHandler {
-                if (XiaomiADBFastbootTools.linux)
-                    Runtime.getRuntime().exec("xdg-open http://twitter.szaki.io/")
-                else Desktop.getDesktop().browse(URI("http://twitter.szaki.io/"))
-            }
-            twitter.font = Font(15.0)
             val github = Hyperlink("Repository on GitHub")
             github.onAction = EventHandler {
-                if (XiaomiADBFastbootTools.linux)
-                    Runtime.getRuntime().exec("xdg-open https://github.com/Szaki/XiaomiADBFastbootTools")
-                else Desktop.getDesktop().browse(URI("https://github.com/Szaki/XiaomiADBFastbootTools"))
+                if (XiaomiSDKTools.linux)
+                    Runtime.getRuntime().exec("xdg-open https://github.com/alfaslash/XiaomiSDKTools")
+                else Desktop.getDesktop().browse(URI("https://github.com/alfaslash/XiaomiSDKTools"))
             }
             github.font = Font(15.0)
-            vb.children.addAll(discord, twitter, github)
+            vb.children.addAll(github)
             dialogPane.content = vb
             isResizable = false
             showAndWait()
+        }
+    }
+
+    @FXML
+    private fun changeLocalizationPressed() {
+        GlobalScope.launch {
+            if (Device.checkADB()) {
+                withContext(Dispatchers.Main) {
+                    val languages = FXCollections.observableArrayList(
+                        "Russian",
+                        "Ukrainian",
+                        "Belarusian",
+                        "Bulgarian",
+                        "Czech",
+                        "Danish",
+                        "Polish",
+                        "Turkish",
+                        "English"
+                    )
+                    var selectedLang = "Russian"
+
+                    Alert(AlertType.CONFIRMATION).apply {
+                        initStyle(StageStyle.UTILITY)
+                        title = "Changing the language of your device"
+                        headerText = "Select your language"
+
+                        val vb = VBox()
+                        vb.alignment = Pos.CENTER
+                        vb.minWidth = 320.0
+
+                        val languagesComboBox = ComboBox(languages)
+                        languagesComboBox.value = selectedLang
+                        languagesComboBox.minWidth = 300.0
+                        languagesComboBox.setOnAction { selectedLang = languagesComboBox.value }
+                        vb.children.addAll(languagesComboBox)
+
+                        dialogPane.content = vb
+                        isResizable = false
+                        val result: Optional<ButtonType> = showAndWait()
+                        if (result.get() == ButtonType.OK){
+                            val locale = when (selectedLang) {
+                                "Russian" -> "ru-RU"
+                                "Ukrainian" -> "uk-UA"
+                                "Belarusian" -> "be-BY"
+                                "Bulgarian" -> "bg-BG"
+                                "Czech" -> "cs-CZ"
+                                "Danish" -> "da-DK"
+                                "Polish" -> "pl-PL"
+                                "Turkish" -> "tr-TR"
+                                else -> "en-US"
+                            }
+                            if ("Exception" in Command.exec(mutableListOf("adb", "shell", "settings", "put", "system", "system_locales", locale))) {
+                                outputTextArea.text = "Error: System language was not changed."
+                            } else {
+                                outputTextArea.text = "The system language of your device has been changed.\n" +
+                                        "Reboot the device to apply the changes!"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

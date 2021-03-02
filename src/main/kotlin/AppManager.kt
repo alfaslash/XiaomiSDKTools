@@ -21,7 +21,7 @@ object AppManager {
     lateinit var progressInd: ProgressIndicator
     lateinit var outputTextArea: TextInputControl
     var user = "0"
-    val customApps = File(XiaomiADBFastbootTools.dir, "apps.yml")
+    val customApps = File(XiaomiSDKTools.dir, "apps.yml")
     private val potentialApps = mutableMapOf<String, String>()
 
     init {
@@ -34,7 +34,7 @@ object AppManager {
         potentialApps["android.autoinstalls.config.Xiaomi.${Device.codename}"] = "PAI"
         withContext(Dispatchers.IO) {
             try {
-                URL("https://raw.githubusercontent.com/Szaki/XiaomiADBFastbootTools/master/src/main/resources/apps.yml").readText()
+                URL("https://raw.githubusercontent.com/alfaslash/XiaomiSDKTools/master/src/main/resources/apps.yml").readText()
                     .trim().lines()
             } catch (ex: Exception) {
                 this::class.java.classLoader.getResource("apps.yml")?.readText()?.trim()?.lines()
