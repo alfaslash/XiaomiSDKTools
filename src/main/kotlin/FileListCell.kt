@@ -39,9 +39,7 @@ class FileListCell : ListCell<AndroidFile>() {
             text = null
             graphic = null
         } else {
-            dir.image = if (item.dir)
-                folderimg
-            else fileimg
+            dir.image = if (item.dir) folderimg else fileimg
             name.text = item.name
             size.text = item.getSize()
             time.text = item.time

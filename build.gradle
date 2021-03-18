@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.5.0-M1'
     id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
@@ -9,10 +9,10 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.4.2"
-    compile "org.openjfx:javafx-graphics:11.0.2:linux"
-    compile "org.openjfx:javafx-graphics:11.0.2:mac"
-    compile "org.openjfx:javafx-graphics:11.0.2:win"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.4.3"
+    compile "org.openjfx:javafx-graphics:16:linux"
+    compile "org.openjfx:javafx-graphics:16:mac"
+    compile "org.openjfx:javafx-graphics:16:win"
 }
 
 jar {
