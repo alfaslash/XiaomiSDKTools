@@ -101,7 +101,7 @@
                </rowConstraints>
                <TextArea fx:id="infoTextArea" editable="false">
                   <font>
-                     <Font size="18.0"/>
+                     <Font size="16.0" />
                   </font>
                </TextArea>
             </GridPane>

@@ -12,10 +12,10 @@
 <VBox prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="FileExplorerController">
     <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0">
-      <TextField fx:id="pathTextField" prefHeight="30.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0"
-                 AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="10.0"/>
-      <Button fx:id="backButton" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0"
-              AnchorPane.topAnchor="10.0"/>
+        <Button fx:id="backButton" mnemonicParsing="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0"
+                AnchorPane.topAnchor="10.0"/>
+        <TextField fx:id="pathTextField" prefHeight="30.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0"
+                 AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"/>
     </AnchorPane>
     <AnchorPane VBox.vgrow="SOMETIMES">
         <ListView fx:id="listView" layoutX="226.0" layoutY="98.0" onMouseClicked="#listViewMouseClicked"
